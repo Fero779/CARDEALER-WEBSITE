@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %} | Confirm Car Deletion {% endblock %}
+{% block content %}
+
+{% load humanize %}
+<!-- Sub banner start -->
+<div class="sub-banner overview-bgi">
+    <div class="container breadcrumb-area">
+        <div class="breadcrumb-areas">
+            <h1>Delete Your Car at SPYNE</h1>
+            <ul class="breadcrumbs">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'cars' %}">Cars</a></li>
+                <li class="active">Delete Car</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Sub Banner end -->
+
+<div class="container mt-5">
+    <!-- Delete Confirmation Form -->
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Are you sure you want to delete this car?</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <div class="form-group">
+                            <p>Are you sure you want to delete the car: <strong>{{ form.instance.model }} ({{ form.instance.year }})</strong>?</p>
+                        </div>
+
+                        <!-- Delete and Cancel buttons -->
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <a href="{% url 'cars' %}" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Confirmation Form end -->
+</div>
+
+{% endblock %}
