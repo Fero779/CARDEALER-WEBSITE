@@ -26,3 +26,6 @@ urllib3==1.25.9
 whitenoise==5.1.0
 django_heroku
 dj_database_url
+pip>=23.3
+setuptools>=65.0
+
