@@ -103,6 +103,7 @@ USE_TZ = True  # Ensure time zone handling is enabled
 import os
 import django_heroku
 
+# Ensure BASE_DIR is loaded first
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'  # Use 'staticfiles' for Heroku
 STATICFILES_DIRS = [BASE_DIR / 'static']  # Directory for your app's static files

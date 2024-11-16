@@ -15,6 +15,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cardealer.settings')
 
 # For Heroku, you can use 'django_heroku' for proper configuration
 import django_heroku
-django_heroku.settings(locals())  # This ensures Heroku settings are applied
 
+# Apply Heroku-specific settings after loading the settings
 application = get_wsgi_application()
+django_heroku.settings(locals())  # This ensures Heroku settings are applied
