@@ -1,1 +1,1 @@
-web gunicorn cool_counter.wsgi:application --log-file -
+web gunicorn cardealer.wsgi:application --log-file -
