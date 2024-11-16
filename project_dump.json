@@ -553,8 +553,8 @@
     "fields": {
         "provider": "facebook",
         "name": "Facebook login",
-        "client_id": "3152411174878187",
-        "secret": "aa4c6c332011b5f8187da05ea10c98e1",
+        "client_id": "",
+        "secret": "",
         "key": "",
         "sites": [
             [
@@ -569,8 +569,8 @@
     "fields": {
         "provider": "google",
         "name": "Google Login",
-        "client_id": "25096788402-qm94k14ibei9ed4s3n7tdmim3qmpb73k.apps.googleusercontent.com",
-        "secret": "flR1Z55bzbiZvEZtUTxElSSi",
+        "client_id": "",
+        "secret": "",
         "key": "",
         "sites": [
             [
@@ -624,7 +624,7 @@
     "fields": {
         "app": 2,
         "account": 2,
-        "token": "ya29.a0AfH6SMDOvwjdqqUme-ShGPbRS6c_bp9u98vs_ac5Vi88HtFNnwPvQWv2OKAvinQfj56WVabBhnAv7bPThZh7iJAFBg4czr4GTYonnpJfg3CHBdNhD07LZ9-wStaV_iUpZ4jIIyKtl8ApSr2nRyZynU8SpCRxf0s6YBY",
+        "token": "",
         "token_secret": "",
         "expires_at": "2020-07-20T07:51:14.207Z"
     }
