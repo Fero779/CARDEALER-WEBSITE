@@ -8,9 +8,13 @@ https://docs.djangoproject.com/en/3.0/howto/deployment/wsgi/
 """
 
 import os
-
 from django.core.wsgi import get_wsgi_application
 
+# Ensure the correct settings module is loaded based on the environment
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cardealer.settings')
+
+# For Heroku, you can use 'django_heroku' for proper configuration
+import django_heroku
+django_heroku.settings(locals())  # This ensures Heroku settings are applied
 
 application = get_wsgi_application()

@@ -8,9 +8,8 @@ SECRET_KEY = '934nw3r62@!m0^ksgw3#31tntglnr%td+-_b89xpu2@q2zqv=d'
 
 DEBUG = True  # Change to False in production
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*']  # Use specific hosts or domains in production
 LOGIN_REDIRECT_URL = 'dashboard'
-
 
 # Application definition
 INSTALLED_APPS = [
@@ -40,7 +39,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Ensure Whitenoise is installed
+    'whitenoise.middleware.WhiteNoiseMiddleware',  
+    'allauth.account.middleware.AccountMiddleware', 
 ]
 
 ROOT_URLCONF = 'cardealer.urls'
@@ -55,7 +55,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',
+                'django.template.context_processors.request',  # Required by allauth
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -65,19 +65,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'cardealer.wsgi.application'
 
-
 # Database configuration (PostgreSQL)
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'cardealer_db', 
-        'USER': 'myuser',       
-        'PASSWORD': 'mypassword',  
-        'HOST': 'localhost',     
-        'PORT': '5432',  
-    }
+    'default': dj_database_url.config(
+        default='postgres://myuser:mypassword@localhost:5432/cardealer_db',
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
-
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -109,13 +104,17 @@ import os
 import django_heroku
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Use 'staticfiles' for Heroku
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)  # Same as your setup, but in tuple form
-django_heroku.settings(locals())  # Configure settings for Heroku
-
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Use 'staticfiles' for Heroku
+STATICFILES_DIRS = [BASE_DIR / 'static']  # Directory for your app's static files
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
+
+# Whitenoise settings for static files
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Activate Django-Heroku settings
+django_heroku.settings(locals())
 
 # Messages
 from django.contrib.messages import constants as messages
@@ -123,7 +122,5 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
 
+# Site ID
 SITE_ID = 1
-
-# Whitenoise settings for static files
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
