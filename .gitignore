@@ -18,3 +18,5 @@ media/
 # IDE configurations
 .vscode/
 *.swp
+
+project_dump.json
