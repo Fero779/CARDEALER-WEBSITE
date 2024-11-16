@@ -1,5 +1,5 @@
 import dj_database_url
-from pathlib import Path  
+from pathlib import Path
 
 # BASE_DIR should now be a Path object, using pathlib
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,8 +39,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  
-    'allauth.account.middleware.AccountMiddleware', 
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'allauth.account.middleware.AccountMiddleware',  # This is fine with the updated version
 ]
 
 ROOT_URLCONF = 'cardealer.urls'
