@@ -1,4 +1,4 @@
-import os
+import dj_database_url
 from pathlib import Path  
 
 # BASE_DIR should now be a Path object, using pathlib
@@ -8,8 +8,7 @@ SECRET_KEY = '934nw3r62@!m0^ksgw3#31tntglnr%td+-_b89xpu2@q2zqv=d'
 
 DEBUG = True  # Change to False in production
 
-ALLOWED_HOSTS = ['198.211.99.20', 'localhost', '127.0.0.1']  # Add more hosts in production
-
+ALLOWED_HOSTS = ['*']
 LOGIN_REDIRECT_URL = 'dashboard'
 
 
@@ -71,11 +70,11 @@ WSGI_APPLICATION = 'cardealer.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'cardealer_db',  # Replace with your DB name
-        'USER': 'myuser',       # Replace with your DB user
-        'PASSWORD': 'mypassword',  # Replace with your DB password
-        'HOST': 'localhost',     # Change to your DB host if needed
-        'PORT': '5432',          # Default PostgreSQL port
+        'NAME': 'cardealer_db', 
+        'USER': 'myuser',       
+        'PASSWORD': 'mypassword',  
+        'HOST': 'localhost',     
+        'PORT': '5432',         
     }
 }
 
@@ -106,12 +105,14 @@ USE_L10N = True
 
 USE_TZ = True  # Ensure time zone handling is enabled
 
-# Static and media files configuration
+import os
+import django_heroku
+
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'static'  # Adjust if needed
-STATICFILES_DIRS = [
-    BASE_DIR / 'cardealer' / 'static',  # Pointing to the static folder inside 'cardealer'
-]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Use 'staticfiles' for Heroku
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)  # Same as your setup, but in tuple form
+django_heroku.settings(locals())  # Configure settings for Heroku
+
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'

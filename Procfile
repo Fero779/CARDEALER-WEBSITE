@@ -1,2 +1,1 @@
-release: python manage.py migrate
-web: gunicorn carzone.wsgi
+web gunicorn cool_counter.wsgi:application --log-file -
